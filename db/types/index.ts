@@ -14,9 +14,7 @@ export interface IBingBG extends Bing, Document { }
 
 export interface IQuote extends Quote, Document { }
 
-export interface IArticle extends Article, Document {
-  categories: IMiniCategory[]
-}
+export interface IArticle extends Article, Document { }
 
 export interface IMiniCategory extends MiniCategory, Document { }
 

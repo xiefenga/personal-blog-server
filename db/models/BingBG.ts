@@ -14,6 +14,6 @@ const bingSchema = new Schema<IBingBG>({
   date: {
     type: Date
   }
-});
+}, { versionKey: false });
 
 export default model('Bing', bingSchema);

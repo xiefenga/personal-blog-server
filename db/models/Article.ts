@@ -9,9 +9,13 @@ const categorySchema = new Schema<IMiniCategory>({
   topLevel: {
     type: ObjectId,
     required: true,
+    ref: 'TopLevelCategory'
   },
-  twoLevel: ObjectId
-});
+  twoLevel: {
+    type: ObjectId,
+    ref: 'TwoLevelCategory'
+  }
+}, { versionKey: false });
 
 const articleSchema = new Schema<IArticle>({
   title: {
@@ -32,11 +36,12 @@ const articleSchema = new Schema<IArticle>({
     required: true,
     index: true
   },
-  tags: {
-    type: [ObjectId],
+  tags: [{
+    type: ObjectId,
     required: true,
-    index: true
-  },
+    index: true,
+    ref: 'Tag'
+  }],
   wordcount: {
     type: Number
   },
@@ -47,6 +52,6 @@ const articleSchema = new Schema<IArticle>({
     type: String,
     default: '/assets/default.jpg'
   }
-}, { timestamps: true });
+}, { timestamps: true, versionKey: false });
 
 export default model('Article', articleSchema);

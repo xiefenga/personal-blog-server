@@ -10,8 +10,9 @@ interface ICategory {
 
 interface IResponse {
   status: 'success' | 'fail'
-  data: object
-  error: string | string[]
+  data?: object
+  error?: string | string[]
+  count?: number
 }
 
 interface IResCategory {

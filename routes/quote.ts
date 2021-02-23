@@ -3,7 +3,7 @@ import { getQuotes, getTodayQuote } from '../services/quoteServices';
 
 const router = new Router();
 
-router.get('/', async (ctx, next) => {
+router.get('/', async ctx => {
   const quote = await getTodayQuote();
   ctx.body = {
     status: 'success',
@@ -11,7 +11,7 @@ router.get('/', async (ctx, next) => {
   };
 });
 
-router.get('/all', async (ctx, next) => {
+router.get('/all', async ctx => {
   const { page, size } = ctx.request.query;
   const res = await getQuotes(page as string, size as string);
   ctx.body = typeof res === 'string'

@@ -9,6 +9,6 @@ const categorySchema = new Schema<ITopLevelCategory>({
     required: true,
     unique: true
   }
-});
+}, { versionKey: false });
 
 export default model('TopLevelCategory', categorySchema);

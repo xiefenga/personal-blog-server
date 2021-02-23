@@ -20,6 +20,6 @@ const quoteSchema = new Schema<IQuote>({
     type: String,
     required: true
   }
-});
+}, { versionKey: false });
 
 export default model('Quote', quoteSchema);

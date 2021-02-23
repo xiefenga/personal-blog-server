@@ -1,19 +1,17 @@
 import { BingBGModel } from "../db"
 import { IBingBG } from "../db/types"
 import { getDailyImage } from "../request"
+import { validatePage } from "../validate/validatePage";
 
 const getTodayBing = async (): Promise<IBingBG> => {
-  const [bing] = await BingBGModel.find({}, '-__v').sort({ date: -1 }).limit(1);
+  const [bing] = await BingBGModel.find().sort({ date: -1 }).limit(1);
   return bing;
 }
 
-const getBings = async (page: number | string = 1, size: number | string = 10): Promise<string | IBingBG[]> => {
-  page = Number(page);
-  size = Number(size);
-  if (page <= 0 || size <= 0 || !Number.isInteger(page) || !Number.isInteger(size)) {
-    return '参数非法';
-  }
-  const bings = await BingBGModel.find({}, '-__v').sort({ date: 1 }).limit(1);
+const getBings = async (page: number = 1, size: number = 10): Promise<string | IBingBG[]> => {
+  const error = validatePage(page, size);
+  if (typeof error === 'string') { return error; }
+  const bings = await BingBGModel.find().sort({ date: -1 }).skip(size * (page - 1)).limit(size);
   return bings;
 }
 

@@ -10,7 +10,10 @@ const categorySchema = new Schema<ITwoLevelCategory>({
     type: String,
     required: true
   },
-  parent: ObjectId
-});
+  parent: {
+    type: ObjectId,
+    ref: 'TopLevelCategory'
+  }
+}, { versionKey: false });
 
 export default model('TwoLevelCategory', categorySchema);
