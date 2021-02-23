@@ -1,6 +1,6 @@
 import Router from '@koa/router'
-import { getBings, getTodayBing } from '../services/bingServices';
-import queryToNumber from '../util/transformQuery';
+import queryToNumber from '../util/transformQuery'
+import { getBings, getTodayBing } from '../services/bingServices'
 
 const router = new Router();
 

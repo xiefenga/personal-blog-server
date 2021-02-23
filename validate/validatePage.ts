@@ -1,15 +1,15 @@
 const validatePage = (page: number, size: number): boolean | string =>
-  lgZero(page)
+  !gtZero(page)
     ? 'page必须大于0'
-    : isInteger(page)
+    : !isInteger(page)
       ? 'page必须为整数'
-      : lgZero(size)
+      : !gtZero(size)
         ? 'size必须大于0'
-        : isInteger(size)
+        : !isInteger(size)
           ? 'size必须为整数'
           : true;
 
-const lgZero = (num: number) => num > 0;
+const gtZero = (num: number) => num > 0;
 
 const isInteger = (num: number) => Number.isInteger(num);
 

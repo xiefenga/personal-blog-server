@@ -95,16 +95,32 @@ const getTopLevelArticles = async (id: string, page: number = 1, size: number = 
   const error = validatePage(page, size);
   if (typeof error === 'string') { return error; }
   const count = await ArticleModel.find({ "categories.topLevel": id }).countDocuments();
-  const articles = await ArticleModel.find({ "categories.topLevel": id }).sort({ createdAt: -1 }).skip(size * (page - 1)).limit(size);
+  const articles = await ArticleModel.find({ "categories.topLevel": id }).sort({ createdAt: -1 }).skip(size * (page - 1)).limit(size).populate({
+    path: 'categories',
+    populate: 'topLevel twoLevel'
+  }).populate('tags');;
   return [articles, count];
 }
-
 
 const getTwoLevelArticles = async (topId: string, twoId: string, page: number = 1, size: number = 10): Promise<string | [IArticle[], number]> => {
   const error = validatePage(page, size);
   if (typeof error === 'string') { return error; }
   const count = await ArticleModel.find({ "categories.topLevel": topId, "categories.twoLevel": twoId }).countDocuments();
-  const articles = await ArticleModel.find({ "categories.topLevel": topId, "categories.twoLevel": twoId }).sort({ createdAt: -1 }).skip(size * (page - 1)).limit(size);
+  const articles = await ArticleModel.find({ "categories.topLevel": topId, "categories.twoLevel": twoId }).sort({ createdAt: -1 }).skip(size * (page - 1)).limit(size).populate({
+    path: 'categories',
+    populate: 'topLevel twoLevel'
+  }).populate('tags');;
+  return [articles, count];
+}
+
+const getTagArticles = async (tagId: string, page: number = 1, size: number = 10): Promise<string | [IArticle[], number]> => {
+  const error = validatePage(page, size);
+  if (typeof error === 'string') { return error; }
+  const count = await ArticleModel.find({ 'tags': tagId }).countDocuments();
+  const articles = await ArticleModel.find({ 'tags': tagId }).sort({ createdAt: -1 }).skip(size * (page - 1)).limit(size).populate({
+    path: 'categories',
+    populate: 'topLevel twoLevel'
+  }).populate('tags');;
   return [articles, count];
 }
 
@@ -116,5 +132,6 @@ export {
   deleteArticle,
   getArticleById,
   getTopLevelArticles,
-  getTwoLevelArticles
+  getTwoLevelArticles,
+  getTagArticles
 }

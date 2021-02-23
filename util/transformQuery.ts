@@ -1,4 +1,4 @@
-const queryToNumber = (val: string | string[] | undefined): number | undefined {
+const queryToNumber = (val: string | string[] | undefined): number | undefined => {
   if (val === undefined) {
     return val;
   }

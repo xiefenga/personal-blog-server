@@ -1,5 +1,10 @@
 import Router from '@koa/router'
-import { getTopLevelArticles, getTwoLevelArticles } from '../services/articleServices';
+import queryToNumber from '../util/transformQuery'
+import {
+  getTopLevelArticles,
+  getTwoLevelArticles
+} from '../services/articleServices'
+
 import {
   getCategories,
   addTopLevelCategory,
@@ -9,7 +14,7 @@ import {
   updateTopLevelCategory,
   updateTwoLevelCategory
 } from '../services/categoryServices'
-import queryToNumber from '../util/transformQuery';
+
 
 const router = new Router();
 

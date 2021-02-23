@@ -43,9 +43,4 @@ const updateTag = async (id: string, tagObj: object): Promise<string[] | boolean
 
 const getTags = async (): Promise<ITag[]> => TagModel.find({});
 
-const getTag = async (id: string): Promise<ITag | string> => {
-  const tag = await TagModel.findOne({ _id: id });
-  return tag || '该标签不存在';
-}
-
-export { addTag, deleteTag, updateTag, getTags, getTag }
+export { addTag, deleteTag, updateTag, getTags }
