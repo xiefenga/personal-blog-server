@@ -1,12 +1,10 @@
 import OSS from "ali-oss"
+import { resolve } from "path"
+import { readFile } from "fs/promises"
 
 const uploadALiOSS = async (filename: string, file: Buffer) => {
-  const client = new OSS({
-    region: 'oss-cn-hangzhou',
-    accessKeyId: 'LTAI4GC7mha3w3tGtxVP2BwN',
-    accessKeySecret: 'A3GxBehW0zP46se6veL2ZbP4cI2z7J',
-    bucket: 'xf-blog-imgs'
-  });
+  const config = await readFile(resolve(__dirname, '../ossconfig.json'), { encoding: 'utf-8' });
+  const client = new OSS(JSON.parse(config));
   return await client.put('/person-blog/' + filename, file);
 }
 
