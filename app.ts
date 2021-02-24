@@ -4,8 +4,11 @@ import cors from '@koa/cors'
 import router from './routes'
 import koaStatic from 'koa-static'
 import bodyParser from 'koa-bodyparser'
+import { errorMiddleware } from './middlewares'
 
 const app = new Koa();
+
+app.use(errorMiddleware());
 
 app.use(cors());
 
