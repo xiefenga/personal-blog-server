@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer'
 import MiniCategory from './MiniCategory'
 import { IsArrayOfMongoId } from '../validate/decorator'
-import { IsInt, IsDate, IsString, IsNotEmpty, ValidateIf, ArrayMinSize, ValidateNested, MinDate } from 'class-validator'
+import { IsInt, IsDate, IsString, IsNotEmpty, ValidateIf, ArrayMinSize, ValidateNested, MinDate, IsPositive } from 'class-validator'
 
 
 
@@ -33,16 +33,19 @@ class Article {
   public tags: string[];
 
   @ValidateIf((o, value) => value !== undefined)
+  @IsPositive({ message: 'wordcount值错误' })
   @IsInt({ message: 'wordcount类型错误' })
   @Type(() => Number)
   public wordcount?: number;
 
   @ValidateIf((o, value) => value !== undefined)
+  @IsPositive({ message: 'wordcount值错误' })
   @IsInt({ message: 'readingTime类型错误' })
   @Type(() => Number)
   public readingTime?: number;
 
   @ValidateIf((o, value) => value !== undefined)
+  @IsNotEmpty({ message: 'postCover不能为空' })
   @IsString({ message: 'postCover类型错误' })
   @Type(() => String)
   public postCover?: string;
