@@ -15,8 +15,12 @@ router.post('/', upload.single('cover'), async ctx => {
   if (!['jpg', 'png', 'svg', 'jpeg', 'gif'].includes(ext)) {
     ctx.throw(400, 'just allow img');
   }
-  const { url } = await uploadALiOSS(ctx.file.originalname, ctx.file.buffer);
-  ctx.body = { status: 'success', data: { url } };
+  try {
+    const { url } = await uploadALiOSS(ctx.file.originalname, ctx.file.buffer);
+    ctx.body = { status: 'success', data: { url } };
+  } catch (error) {
+    ctx.body = { status: 'fail', error: '配置文件不存在或配置不正确' };
+  }
 });
 
 export default router;
