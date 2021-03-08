@@ -9,6 +9,8 @@
 
 技术栈：typescript + mongodb + koa
 
+在线使用接口地址：http://api.xiefeng.tech/
+
 # 接口文档
 
 api 起始地址都是 `/api`
